@@ -11,7 +11,7 @@ sed -i s#172.17.0.1#$hs2#g /tmp/drill.json
 sed -i s#172.17.0.1#$hs2#g /tmp/hive.json
 sed -i s#172.17.0.1#$hs2#g /tmp/livy.json
 
-su mapr -c 'sqlline -u "jdbc:drill:drillbit=$hs2:31010;auth=maprsasl" --run=/tmp/tweets-view.sql'
+su mapr -c "sqlline -u \"jdbc:drill:drillbit=${hs2}:31010;auth=maprsasl\" --run=/tmp/tweets-view.sql"
 
 dsr=`curl -i --data 'userName=mapr&password=mapr' -k -s -X POST https://localhost:9995/api/login | grep OK`
 while [[ -z $dsr ]] 
