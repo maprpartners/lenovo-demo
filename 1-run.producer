@@ -1,6 +1,3 @@
-CL_NAME="MapR's CLDB IP addresses, i.e. 10.0.0.1,10.0.0.2,10.0.0.3"
-HOST_IP="Your Edge node IP address in the same subnet as the MapR cluster's, i.e. 10.0.0.10"
-
 CK="Your Consumer Key"
 CS="Your Consumer Secret"
 AT="Your Access Token"
@@ -13,7 +10,8 @@ docker run -d -it --name maprc-producer \
 --security-opt apparmor:unconfined \
 --memory 0 \
 --restart always \
--e MAPR_CLDB_HOSTS="$HOST_IP" \
+-e MAPR_CLDB_HOSTS="$MAPR_CLDB_HOSTS" \
+-e HOST_IP="$HOST_IP" \
 -e MAPR_CLUSTER="$CL_NAME" \
 -e MAPR_PASSWORD="mapr" \
 -e CONSUMER_KEY="$CK" \
@@ -22,4 +20,5 @@ docker run -d -it --name maprc-producer \
 -e ACCESS_SECRET="$AS" \
 -e KEYWORD_FILTER="['Lenovo','tax','healthcare','korea','mapr','tableau','hadoop','big data','bigdata','IoT','zeppelin','artificial intelligence','AI','Azure','AWS','Alexa','data science','data scientist','business intelligence','mapreduce','data warehousing','mahout','hbase','nosql','newsql','machine learning','cloudcomputing']" \
 -v /opt/mapr/conf/ssl_truststore:/opt/mapr/conf/ssl_truststore:ro \
-maprazure/maprc-producer:latest
+maprpartners/maprc-producer:latest
+
