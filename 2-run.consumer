@@ -8,5 +8,6 @@ docker run -d -it --name maprc-consumer \
 -e MAPR_CLDB_HOSTS="$MAPR_CLDB_HOSTS" \
 -e MAPR_CLUSTER="$CL_NAME" \
 -e MAPR_PASSWORD="mapr" \
--v /opt/mapr/conf/ssl_truststore:/opt/mapr/conf/ssl_truststore:ro \
+-e MAPR_TICKETFILE_LOCATION=/tmp/mapr_ticket \
+-v /tmp/mapruserticket:/tmp/mapr_ticket:ro \
 maprpartners/maprc-consumer:latest
