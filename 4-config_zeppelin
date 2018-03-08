@@ -1,11 +1,17 @@
 echo "Configuring Zeppelin..."
+echo mapr:mapr | chpasswd
+echo "Please input the IP address of the MapR cluster node where Hive Server 2 is installed. You can find this information in MCS."
+read hs2
+wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/tweets-view.sql -O /tmp/tweets-view.sql
 wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/drill.json -O /tmp/drill.json
 wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/hive.json -O /tmp/hive.json
 wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/livy.json -O /tmp/livy.json
-#su mapr -c 'sqlline -u "jdbc:drill:drillbit=localhost:31010;auth=maprsasl" --run=/tmp/tweets-view.sql'
 
-#Install Livy
-#yum -y install mapr-livy
+sed -i s#172.17.0.1#$hs2#g /tmp/drill.json
+sed -i s#172.17.0.1#$hs2#g /tmp/hive.json
+sed -i s#172.17.0.1#$hs2#g /tmp/livy.json
+
+su mapr -c 'sqlline -u "jdbc:drill:drillbit=$hs2:31010;auth=maprsasl" --run=/tmp/tweets-view.sql'
 
 dsr=`curl -i --data 'userName=mapr&password=mapr' -k -s -X POST https://localhost:9995/api/login | grep OK`
 while [[ -z $dsr ]] 
