@@ -9,11 +9,11 @@ docker run --name dsr -d -it \
 -e MAPR_CONTAINER_GROUP=mapr \
 -e MAPR_CONTAINER_GID=5000 \
 -e MAPR_CONTAINER_PASSWORD=mapr \
--e MAPR_CLDB_HOSTS="10.4.1.61" \
+-e MAPR_CLDB_HOSTS="$MAPR_CLDB_HOSTS" \
 -e MAPR_TICKETFILE_LOCATION=/tmp/mapr_ticket \
 -e ZEPPELIN_SSL_PORT=9995 \
--e HOST_IP="172.17.0.1" \
+-e HOST_IP="$HOST_IP" \
 -p 9995:9995 -p 20000-20010:20000-20010 \
--v /tmp/maprticket_5000:/tmp/mapr_ticket:ro \
+-v /tmp/mapruserticket:/tmp/mapr_ticket:ro \
 -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
 maprtech/data-science-refinery
