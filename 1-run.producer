@@ -1,7 +1,7 @@
-CK="Your Consumer Key"
-CS="Your Consumer Secret"
-AT="Your Access Token"
-AS="Your Access Token Secret"
+CK="Your Twitter App Consumer Key"
+CS="Your Twitter App Consumer Secret"
+AT="Your Twitter App Access Token"
+AS="Your Twitter App Access Token Secret"
 
 echo "Starting producer..."
 docker run -d -it --name maprc-producer \
