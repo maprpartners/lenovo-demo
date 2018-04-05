@@ -7,7 +7,6 @@ docker run -d -it --name maprc-consumer \
 --restart always \
 -e MAPR_CLDB_HOSTS="$MAPR_CLDB_HOSTS" \
 -e MAPR_CLUSTER="$CL_NAME" \
--e MAPR_PASSWORD="mapr" \
 -e MAPR_TICKETFILE_LOCATION=/tmp/mapr_ticket \
 -v /tmp/mapruserticket:/tmp/mapr_ticket \
 maprpartners/maprc-consumer:latest
