@@ -9,5 +9,5 @@ docker run -d -it --name maprc-consumer \
 -e MAPR_CLUSTER="$CL_NAME" \
 -e MAPR_PASSWORD="mapr" \
 -e MAPR_TICKETFILE_LOCATION=/tmp/mapr_ticket \
--v /tmp/mapruserticket:/tmp/mapr_ticket:ro \
+-v /tmp/mapruserticket:/tmp/mapr_ticket \
 maprpartners/maprc-consumer:latest

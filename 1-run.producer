@@ -1,7 +1,11 @@
-CK="Your Twitter App Consumer Key"
-CS="Your Twitter App Consumer Secret"
-AT="Your Twitter App Access Token"
-AS="Your Twitter App Access Token Secret"
+echo "Please manually copy the /opt/mapr/conf/mapruserticket on your CLDB server to current working directory."
+echo "hit <enter> when done"
+read ans
+cp mapruserticket /tmp
+CK="2xkc5Mn0BvabvqsC57OK4P5ex"
+CS="A87AhX2CYhJTLQ22vd29EZo2uae2eLiRMAZ5Po9x3hPONRA4Xr"
+AT="22847039-3n2dKLDyQxzeM4zB25aXOMj86Mtz8LqaYzl340aBB"
+AS="Kb7QXsppIjZ6wuH7jgsVTPClu4zSVl3J02Xj5vtoEfWKE"
 
 echo "Starting producer..."
 docker run -d -it --name maprc-producer \
@@ -13,12 +17,12 @@ docker run -d -it --name maprc-producer \
 -e MAPR_CLDB_HOSTS="$MAPR_CLDB_HOSTS" \
 -e HOST_IP="$HOST_IP" \
 -e MAPR_CLUSTER="$CL_NAME" \
--e MAPR_PASSWORD="mapr" \
 -e CONSUMER_KEY="$CK" \
 -e CONSUMER_SECRET="$CS" \
 -e ACCESS_TOKEN="$AT" \
 -e ACCESS_SECRET="$AS" \
 -e MAPR_TICKETFILE_LOCATION=/tmp/mapr_ticket \
 -e KEYWORD_FILTER="['Lenovo','tax','healthcare','korea','mapr','tableau','hadoop','big data','bigdata','IoT','zeppelin','artificial intelligence','AI','Azure','AWS','Alexa','data science','data scientist','business intelligence','mapreduce','data warehousing','mahout','hbase','nosql','newsql','machine learning','cloudcomputing']" \
--v /tmp/mapruserticket:/tmp/mapr_ticket:ro \
+-v /tmp/mapruserticket:/tmp/mapr_ticket \
 maprpartners/maprc-producer:latest
+
