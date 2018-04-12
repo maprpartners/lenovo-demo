@@ -1,6 +1,6 @@
 echo "Configuring Zeppelin..."
 echo mapr:mapr | chpasswd
-echo "Please input the IP address of the MapR cluster node where Hive Server 2 is installed. You can find this information in MCS."
+echo "Please input the IP address of the MapR cluster node where Hive Server2 is installed. You can find this information in MCS."
 read hs2
 #wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/tweets-view.sql -O /tmp/tweets-view.sql
 wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/drill.json -O /tmp/drill.json
@@ -13,11 +13,19 @@ sed -i s#172.17.0.1#$hs2#g /tmp/livy.json
 
 echo
 echo "Now on any of the drill node, login as user \"mapr\", run the following commands before proceeding, hit <enter> when done..."
+echo 
 echo "1. wget https://raw.githubusercontent.com/maprpartners/lenovo-demo/master/tweets-view.sql -O /tmp/tweets-view.sql"
 echo "2. sqlline -u \"jdbc:drill:drillbit=localhost:31010;auth=maprsasl\" --run=/tmp/tweets-view.sql"
 read done
 #su mapr -c "sqlline -u \"jdbc:drill:drillbit=${hs2}:31010;auth=maprsasl\" --run=/tmp/tweets-view.sql"
 
+echo
+echo "Now on Hive Server2 node, login as user \"root\", run the following commands before proceeding, hit <enter> when done..."
+echo 
+echo "1. yum -y install mapr-livy
+echo "2. /opt/mapr/server/configure.sh -R
+read done
+echo
 
 dsr=`curl -i --data 'userName=mapr&password=mapr' -k -s -X POST https://localhost:9995/api/login | grep OK`
 while [[ -z $dsr ]] 
